@@ -11,6 +11,11 @@ export const startApp = async () => {
 
   const eventEmitter = new EventEmitter();
 
+  // add keyboard handling logic
+  document.addEventListener('keydown', (ev: unknown) => {
+    eventEmitter.emit('keydown', ev);
+  });
+
   const app = await createApp(elem, eventEmitter);
 
   elem.appendChild(app.canvas);
