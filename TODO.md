@@ -6,22 +6,27 @@
 - Load (infinite) floor
 - Add random ground noise / clouds / grass / houses in background  (with movement / animation)
 - Load (animated sprite) player
-- Move player (animated) on the floor (background + floor moves)
-  - Keyboard events (up -> jump, down -> duck)
 
 
 ## Main game
 
+- Move player (animated) on the floor
+- Keyboard events and animations (up -> jump, down -> duck)
 - Load random obstacles (animated)
-- Collision
+- Collision detection
 - Scoring
 - Sounds
 - Show score + high score
 
+
 ## Release
+
+- Responsive for different screen sizes
+- Mobile support?
 
 
 ## Good to have
+
 
 
 ## Todos

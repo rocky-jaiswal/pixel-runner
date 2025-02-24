@@ -15,17 +15,16 @@ export class GameBackground {
   }
 
   public init() {
-    // Create two background sprites
-    Array(2)
+    Array(4)
       .fill(null)
       .forEach((_, i) => {
         const background = Sprite.from('backgroundGrass');
 
-        background.width = this.gameState.width;
+        background.width = 1024;
         background.height = this.gameState.height;
 
         // Position the backgrounds next to each other
-        background.position.x = i * this.gameState.width;
+        background.position.x = i * 1024;
         background.position.y = 0;
 
         this.backgrounds.push(background);
@@ -38,8 +37,8 @@ export class GameBackground {
       this.backgrounds.forEach((bg) => {
         bg.position.x -= this.gameState.gameSpeed;
 
-        if (bg.position.x + this.gameState.width <= 0) {
-          bg.position.x = this.gameState.width - 2;
+        if (bg.position.x <= -1 * 1024) {
+          bg.position.x = 3 * 1024;
         }
       });
     }

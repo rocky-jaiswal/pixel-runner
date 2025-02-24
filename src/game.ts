@@ -9,6 +9,7 @@ import house1PNG from './assets/images/house1.png';
 import house2PNG from './assets/images/house2.png';
 import tower1PNG from './assets/images/tower1.png';
 import tower2PNG from './assets/images/tower2.png';
+import player1PNG from './assets/images/female_sheet.png';
 
 import { MainGameScene } from './mainGameScene';
 import { GameState } from './gameState';
@@ -24,9 +25,6 @@ export class Game {
   constructor(gameState: GameState) {
     this.gameState = gameState;
     this.sceneManager = new SceneManager(gameState);
-
-    // Set up game loop
-    this.gameState.application.ticker.add(this.update.bind(this));
   }
 
   public async init() {
@@ -67,18 +65,25 @@ export class Game {
         src: tower2PNG,
         alias: 'tower2',
       },
+      {
+        src: player1PNG,
+        alias: 'player',
+      },
     ]);
 
-    this.startGame();
+    await this.startGame();
+
+    // Set up game loop
+    this.gameState.application.ticker.add(this.update.bind(this));
   }
 
-  private startGame() {
+  private async startGame() {
     // Set up initial scenes
     this.sceneManager.addScene('game', new MainGameScene(this.gameState));
     this.sceneManager.addScene('result', new ResultScene(this.gameState));
 
     this.currentScene = this.sceneManager.switchTo('game');
-    this.currentScene.init();
+    await this.currentScene.init();
   }
 
   update(delta: Ticker) {

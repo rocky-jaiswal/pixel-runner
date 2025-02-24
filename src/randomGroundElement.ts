@@ -11,8 +11,8 @@ export class RandomGroundElement {
   private allElements = {
     house1: 545,
     house2: 545,
-    tower1: 545,
-    tower2: 545,
+    tower1: 535,
+    tower2: 535,
   };
 
   constructor(gameState: GameState) {
@@ -49,7 +49,7 @@ export class RandomGroundElement {
 
       this.elements.forEach((elem, idx) => {
         if (elem.renderable) {
-          elem.position.x -= this.gameState.gameSpeed;
+          elem.position.x -= this.gameState.gameSpeed * 1.2;
         }
 
         if (elem.position.x + elem.width <= 0) {

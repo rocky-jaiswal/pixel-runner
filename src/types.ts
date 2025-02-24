@@ -1,6 +1,6 @@
 import { Ticker } from 'pixi.js';
 
 export interface GameScene {
-  init: () => void;
+  init: () => Promise<void>;
   update: (d: Ticker) => void;
 }

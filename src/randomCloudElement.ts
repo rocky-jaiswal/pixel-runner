@@ -49,7 +49,7 @@ export class RandomCloudElement {
 
       this.elements.forEach((elem, idx) => {
         if (elem.renderable) {
-          elem.position.x -= this.gameState.gameSpeed;
+          elem.position.x = elem.position.x - this.gameState.gameSpeed * 0.3;
         }
 
         if (elem.position.x + elem.width <= 0) {

@@ -17,7 +17,7 @@ export class ResultScene extends Container implements GameScene {
     this.gameState = gameState;
   }
 
-  public init() {
+  public async init() {
     const rect = new Graphics();
     rect.roundRect(50, 50, this.gameState.width - 100, 100, 8);
     rect.fill({ color: '#f1f1f1', alpha: 0.5 });
