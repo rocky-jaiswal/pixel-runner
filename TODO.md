@@ -11,6 +11,8 @@
 ## Main game
 
 - Move player (animated) on the floor
+- Day / night cycle
+- Game speed changes with time
 - Keyboard events and animations (up -> jump, down -> duck)
 - Load random obstacles (animated)
 - Collision detection

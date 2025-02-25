@@ -5,6 +5,8 @@ import { GameState } from './gameState';
 export class Player {
   private readonly gameState: GameState;
   private anim: AnimatedSprite | null = null;
+  private animSpeed: number | null = null;
+  private animPlaying: boolean = false;
 
   constructor(gameState: GameState) {
     this.gameState = gameState;
@@ -45,7 +47,6 @@ export class Player {
     this.anim.position.x = 150;
     this.anim.position.y = this.gameState.height - this.gameState.groundHeight - 125;
     this.anim.anchor.set(0.5);
-    this.anim.animationSpeed = 0.22;
 
     // add it to the stage to render
     this.gameState.application.stage.addChild(this.anim);
@@ -54,9 +55,17 @@ export class Player {
   public update() {
     // console.log(1);
     if (this.gameState.isPlayerMoving) {
-      // play the animation on a loop
-      this.anim?.play();
+      if (this.animSpeed !== this.gameState.gameSpeed * 0.0275) {
+        this.animSpeed = this.gameState.gameSpeed * 0.0275;
+        this.anim!.animationSpeed = this.animSpeed;
+      }
+
+      if (!this.animPlaying) {
+        this.animPlaying = true;
+        this.anim!.play();
+      }
     } else {
+      this.animPlaying = false;
       this.anim?.stop();
     }
   }
