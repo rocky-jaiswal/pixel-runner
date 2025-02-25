@@ -1,4 +1,4 @@
-import { Sprite } from 'pixi.js';
+import { Container, Sprite } from 'pixi.js';
 
 import { GameState } from './gameState';
 import { getRandomInt, getRandomIntBetween } from './util';
@@ -6,6 +6,7 @@ import { getRandomInt, getRandomIntBetween } from './util';
 export class RandomGroundElement {
   private readonly gameState: GameState;
 
+  private container = new Container();
   private elements: Sprite[] = [];
 
   private allElements = {
@@ -18,13 +19,14 @@ export class RandomGroundElement {
   constructor(gameState: GameState) {
     this.gameState = gameState;
 
+    this.gameState.application.stage.addChild(this.container);
     this.init();
   }
 
   public init() {
     const elem = this.addElement(null);
     this.elements.push(elem);
-    this.gameState.application.stage.addChild(elem);
+    this.container.addChild(elem);
   }
 
   private addElement(at: number | null) {
@@ -44,7 +46,7 @@ export class RandomGroundElement {
       if (this.elements.length < 1) {
         const elem = this.addElement(this.gameState.width + 100);
         this.elements.push(elem);
-        this.gameState.application.stage.addChild(elem);
+        this.container.addChild(elem);
       }
 
       this.elements.forEach((elem, idx) => {

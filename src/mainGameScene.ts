@@ -32,8 +32,8 @@ export class MainGameScene extends Container implements GameScene {
     this.groundNoise = new GroundNoise(this.gameState);
     this.randomElement1 = new RandomCloudElement(this.gameState);
     this.randomElement2 = new RandomGroundElement(this.gameState);
-    this.player = new Player(this.gameState);
 
+    this.player = new Player(this.gameState);
     await this.player.init();
   }
 

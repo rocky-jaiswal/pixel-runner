@@ -44,8 +44,8 @@ export class Player {
 
     this.anim = new AnimatedSprite(spritesheet.animations.walking);
 
-    this.anim.position.x = 150;
-    this.anim.position.y = this.gameState.height - this.gameState.groundHeight - 125;
+    this.anim.position.x = this.gameState.playerPositionX;
+    this.anim.position.y = this.gameState.playerPositionY;
     this.anim.anchor.set(0.5);
 
     // add it to the stage to render
@@ -68,5 +68,7 @@ export class Player {
       this.animPlaying = false;
       this.anim?.stop();
     }
+
+    this.anim!.position.y = this.gameState.playerPositionY;
   }
 }

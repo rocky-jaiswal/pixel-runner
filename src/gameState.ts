@@ -16,14 +16,21 @@ export class GameState {
 
   public readonly groundHeight: number = 180;
   public readonly noOfRocks: number = 50;
+
+  private readonly playerGround;
   private readonly brightnessLevels = [0, -0.3, -0.6];
   private readonly timeChange = 10000;
 
-  // dynamic parts
-  private brightnessIndex = 0;
+  private _brightnessIndex = 0;
+  private _playerPositionY;
+  private _playerPositionX = 150;
+  private _isPlayerJumping: boolean = false;
+  private _jumpUp = true;
+  private _jumpTimer: NodeJS.Timeout | null = null;
+
+  public isPlayerMoving: boolean = false;
 
   public gameSpeed: number = 4;
-  public isPlayerMoving: boolean = false;
   public gameEnded: boolean = false;
 
   constructor(props: Props) {
@@ -32,6 +39,10 @@ export class GameState {
 
     this.width = props.width;
     this.height = props.height;
+
+    this.playerGround = this.height - this.groundHeight - 125;
+
+    this._playerPositionY = this.playerGround;
 
     console.log({ w: this.width, h: this.height });
 
@@ -50,6 +61,16 @@ export class GameState {
     if (ev.key === ' ') {
       this.isPlayerMoving = true;
     }
+
+    if (ev.key === 'ArrowUp') {
+      if (!this._isPlayerJumping) {
+        this._isPlayerJumping = true;
+        this._jumpUp = true;
+        this._jumpTimer = setInterval(() => {
+          this.handleJump();
+        }, 35);
+      }
+    }
   }
 
   private changeGameDynamics() {
@@ -58,10 +79,10 @@ export class GameState {
   }
 
   private changeBrightness() {
-    if (this.brightnessIndex === 2) {
-      this.brightnessIndex = 0;
+    if (this._brightnessIndex === 2) {
+      this._brightnessIndex = 0;
     } else {
-      this.brightnessIndex += 1;
+      this._brightnessIndex += 1;
     }
   }
 
@@ -71,7 +92,39 @@ export class GameState {
     }
   }
 
+  private handleJump() {
+    // console.log(this.playerGround);
+    // console.log(this._playerPositionY);
+    if (!this._jumpUp && this._playerPositionY === this.playerGround) {
+      this._isPlayerJumping = false; // jump is complete
+      this._jumpUp = true; // set back jump direction
+      clearInterval(this._jumpTimer!); // clear timer
+    }
+
+    if (this._jumpUp && this._playerPositionY - this.playerGround >= -100) {
+      this._jumpUp = true;
+    } else {
+      this._jumpUp = false;
+    }
+
+    if (this._jumpUp && this._isPlayerJumping) {
+      this._playerPositionY -= 7.5;
+    }
+
+    if (!this._jumpUp && this._isPlayerJumping) {
+      this._playerPositionY += 7.5;
+    }
+  }
+
+  public get playerPositionX() {
+    return this._playerPositionX;
+  }
+
+  public get playerPositionY() {
+    return this._playerPositionY;
+  }
+
   public get brightness() {
-    return this.brightnessLevels[this.brightnessIndex];
+    return this.brightnessLevels[this._brightnessIndex];
   }
 }
