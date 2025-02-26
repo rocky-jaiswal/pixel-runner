@@ -32,7 +32,7 @@ export class GameState {
   public isPlayerJumping: boolean = false;
   public isPlayerDucking: boolean = false;
 
-  public gameSpeed: number = 4;
+  public gameSpeed: number = 8;
   public gameEnded: boolean = false;
 
   constructor(props: Props) {
@@ -42,7 +42,7 @@ export class GameState {
     this.width = props.width;
     this.height = props.height;
 
-    this.playerGround = this.height - this.groundHeight - 92;
+    this.playerGround = this.height - this.groundHeight - 94;
 
     this._playerPositionY = this.playerGround;
 
@@ -77,6 +77,7 @@ export class GameState {
     if (ev.key === 'ArrowDown') {
       if (!this.isPlayerJumping && !this.isPlayerDucking) {
         this.isPlayerDucking = true;
+        this._playerPositionY += 4;
         this._duckTimer = setInterval(() => {
           this.handleDuck();
         }, 800);
@@ -128,6 +129,7 @@ export class GameState {
   }
 
   private handleDuck() {
+    this._playerPositionY -= 4;
     clearInterval(this._duckTimer!); // clear timer
     this.isPlayerDucking = false;
   }

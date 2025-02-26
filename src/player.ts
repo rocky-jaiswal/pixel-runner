@@ -36,7 +36,7 @@ export class Player {
       },
       animations: {
         walking: ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7'],
-        jumping: ['f5', 'f6', 'f7', 'f8', 'f9'],
+        jumping: ['f8', 'f9'],
         ducking: ['f10'],
       },
     };

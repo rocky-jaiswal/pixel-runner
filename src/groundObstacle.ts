@@ -3,17 +3,16 @@ import { Container, Sprite } from 'pixi.js';
 import { GameState } from './gameState';
 import { getRandomInt, getRandomIntBetween } from './util';
 
-export class RandomGroundElement {
+export class GroundObstacle {
   private readonly gameState: GameState;
 
   private container = new Container();
   private elements: Sprite[] = [];
 
   private allElements = {
-    house1: 635,
-    house2: 635,
-    tower1: 532,
-    tower2: 532,
+    bush: 65,
+    stone: 54,
+    mushroom: 70,
   };
 
   constructor(gameState: GameState) {
@@ -24,17 +23,17 @@ export class RandomGroundElement {
   }
 
   public init() {
-    const elem = this.addElement(null);
+    const elem = this.addElement();
     this.elements.push(elem);
     this.container.addChild(elem);
   }
 
-  private addElement(at: number | null) {
+  private addElement() {
     const idx = getRandomInt(Object.keys(this.allElements).length);
 
     const elem = Sprite.from(Object.keys(this.allElements)[idx]);
-    elem.position.x = at ?? getRandomIntBetween(0, this.gameState.width);
-    elem.position.y = Object.values(this.allElements)[idx];
+    elem.position.x = getRandomIntBetween(this.gameState.width, this.gameState.width + 100);
+    elem.position.y = this.gameState.height - this.gameState.groundHeight - Object.values(this.allElements)[idx];
 
     return elem;
   }
@@ -44,7 +43,7 @@ export class RandomGroundElement {
       // console.log(this.elements.length);
 
       if (this.elements.length < 1) {
-        const elem = this.addElement(this.gameState.width + 100);
+        const elem = this.addElement();
         this.elements.push(elem);
         this.container.addChild(elem);
       }

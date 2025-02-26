@@ -9,6 +9,9 @@ import house1PNG from './assets/images/house1.png';
 import house2PNG from './assets/images/house2.png';
 import tower1PNG from './assets/images/tower1.png';
 import tower2PNG from './assets/images/tower2.png';
+import bushPNG from './assets/images/bushO.png';
+import mushroomPNG from './assets/images/mushroom.png';
+import stonePNG from './assets/images/stone.png';
 import player1PNG from './assets/images/female_sheet_2.png';
 
 import { MainGameScene } from './mainGameScene';
@@ -64,6 +67,18 @@ export class Game {
       {
         src: tower2PNG,
         alias: 'tower2',
+      },
+      {
+        src: bushPNG,
+        alias: 'bush',
+      },
+      {
+        src: mushroomPNG,
+        alias: 'mushroom',
+      },
+      {
+        src: stonePNG,
+        alias: 'stone',
       },
       {
         src: player1PNG,

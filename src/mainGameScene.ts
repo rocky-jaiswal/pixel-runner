@@ -8,6 +8,7 @@ import { GroundNoise } from './groundNoise';
 import { RandomGroundElement } from './randomGroundElement';
 import { RandomCloudElement } from './randomCloudElement';
 import { Player } from './player';
+import { GroundObstacle } from './groundObstacle';
 
 export class MainGameScene extends Container implements GameScene {
   private readonly gameState: GameState;
@@ -17,6 +18,7 @@ export class MainGameScene extends Container implements GameScene {
   private groundNoise: GroundNoise | null = null;
   private randomElement1: RandomCloudElement | null = null;
   private randomElement2: RandomGroundElement | null = null;
+  private groundObstacle: GroundObstacle | null = null;
   private player: Player | null = null;
 
   constructor(gameState: GameState) {
@@ -35,6 +37,8 @@ export class MainGameScene extends Container implements GameScene {
 
     this.player = new Player(this.gameState);
     await this.player.init();
+
+    this.groundObstacle = new GroundObstacle(this.gameState);
   }
 
   public update(_delta: Ticker) {
@@ -44,6 +48,7 @@ export class MainGameScene extends Container implements GameScene {
     this.groundNoise?.update();
     this.randomElement1?.update();
     this.randomElement2?.update();
+    this.groundObstacle?.update();
     this.player?.update();
   }
 
