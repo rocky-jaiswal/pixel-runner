@@ -13,6 +13,7 @@ import bushPNG from './assets/images/bushO.png';
 import mushroomPNG from './assets/images/mushroom.png';
 import stonePNG from './assets/images/stone.png';
 import player1PNG from './assets/images/female_sheet_2.png';
+import flyEnemyPNG from './assets/images/fly_sheet_2.png';
 
 import { MainGameScene } from './mainGameScene';
 import { GameState } from './gameState';
@@ -83,6 +84,10 @@ export class Game {
       {
         src: player1PNG,
         alias: 'player',
+      },
+      {
+        src: flyEnemyPNG,
+        alias: 'flyingEnemy',
       },
     ]);
 

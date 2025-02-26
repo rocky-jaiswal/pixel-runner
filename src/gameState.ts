@@ -60,8 +60,10 @@ export class GameState {
   }
 
   private handleKeyDown(ev: KeyboardEvent) {
-    if (ev.key === ' ') {
-      this.isPlayerMoving = true;
+    if (ev.key === ' ' || ev.key === 'ArrowUp') {
+      if (!this.isPlayerMoving) {
+        this.isPlayerMoving = true;
+      }
     }
 
     if (ev.key === 'ArrowUp') {
@@ -113,7 +115,7 @@ export class GameState {
       clearInterval(this._jumpTimer!); // clear timer
     }
 
-    if (this._jumpUp && this._playerPositionY - this.playerGround >= -100) {
+    if (this._jumpUp && this._playerPositionY - this.playerGround >= -105) {
       this._jumpUp = true;
     } else {
       this._jumpUp = false;
