@@ -14,12 +14,17 @@
 - Day / night cycle
 - Game speed changes with time
 
-- Keyboard events and animations (up -> jump, down -> duck)
+- Keyboard events and animations 
+    - up -> jump
+    - down -> duck
 - Load random obstacles (animated)
+    - On ground
+    - In air
 - Collision detection
-- Scoring
+- End screen
 - Sounds
-- Show score + high score
+- Scoring
+    - Show score + high score
 - Restart game
 
 ## Release

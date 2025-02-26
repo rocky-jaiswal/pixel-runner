@@ -10,10 +10,10 @@ export class RandomGroundElement {
   private elements: Sprite[] = [];
 
   private allElements = {
-    house1: 545,
-    house2: 545,
-    tower1: 535,
-    tower2: 535,
+    house1: 635,
+    house2: 635,
+    tower1: 532,
+    tower2: 532,
   };
 
   constructor(gameState: GameState) {

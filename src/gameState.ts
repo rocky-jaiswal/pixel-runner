@@ -24,11 +24,13 @@ export class GameState {
   private _brightnessIndex = 0;
   private _playerPositionY;
   private _playerPositionX = 150;
-  private _isPlayerJumping: boolean = false;
   private _jumpUp = true;
   private _jumpTimer: NodeJS.Timeout | null = null;
+  private _duckTimer: NodeJS.Timeout | null = null;
 
   public isPlayerMoving: boolean = false;
+  public isPlayerJumping: boolean = false;
+  public isPlayerDucking: boolean = false;
 
   public gameSpeed: number = 4;
   public gameEnded: boolean = false;
@@ -40,7 +42,7 @@ export class GameState {
     this.width = props.width;
     this.height = props.height;
 
-    this.playerGround = this.height - this.groundHeight - 125;
+    this.playerGround = this.height - this.groundHeight - 92;
 
     this._playerPositionY = this.playerGround;
 
@@ -63,12 +65,21 @@ export class GameState {
     }
 
     if (ev.key === 'ArrowUp') {
-      if (!this._isPlayerJumping) {
-        this._isPlayerJumping = true;
+      if (!this.isPlayerJumping && !this.isPlayerDucking) {
+        this.isPlayerJumping = true;
         this._jumpUp = true;
         this._jumpTimer = setInterval(() => {
           this.handleJump();
         }, 35);
+      }
+    }
+
+    if (ev.key === 'ArrowDown') {
+      if (!this.isPlayerJumping && !this.isPlayerDucking) {
+        this.isPlayerDucking = true;
+        this._duckTimer = setInterval(() => {
+          this.handleDuck();
+        }, 800);
       }
     }
   }
@@ -96,7 +107,7 @@ export class GameState {
     // console.log(this.playerGround);
     // console.log(this._playerPositionY);
     if (!this._jumpUp && this._playerPositionY === this.playerGround) {
-      this._isPlayerJumping = false; // jump is complete
+      this.isPlayerJumping = false; // jump is complete
       this._jumpUp = true; // set back jump direction
       clearInterval(this._jumpTimer!); // clear timer
     }
@@ -107,13 +118,18 @@ export class GameState {
       this._jumpUp = false;
     }
 
-    if (this._jumpUp && this._isPlayerJumping) {
+    if (this._jumpUp && this.isPlayerJumping) {
       this._playerPositionY -= 7.5;
     }
 
-    if (!this._jumpUp && this._isPlayerJumping) {
+    if (!this._jumpUp && this.isPlayerJumping) {
       this._playerPositionY += 7.5;
     }
+  }
+
+  private handleDuck() {
+    clearInterval(this._duckTimer!); // clear timer
+    this.isPlayerDucking = false;
   }
 
   public get playerPositionX() {

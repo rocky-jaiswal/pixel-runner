@@ -9,7 +9,7 @@ import house1PNG from './assets/images/house1.png';
 import house2PNG from './assets/images/house2.png';
 import tower1PNG from './assets/images/tower1.png';
 import tower2PNG from './assets/images/tower2.png';
-import player1PNG from './assets/images/female_sheet.png';
+import player1PNG from './assets/images/female_sheet_2.png';
 
 import { MainGameScene } from './mainGameScene';
 import { GameState } from './gameState';
