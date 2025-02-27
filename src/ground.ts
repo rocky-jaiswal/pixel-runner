@@ -14,9 +14,9 @@ export class Ground {
     const graphics = new Graphics();
     graphics.rect(
       0,
-      this.gameState.height - this.gameState.groundHeight,
+      this.gameState.height * this.gameState.groundHeight,
       this.gameState.width,
-      this.gameState.groundHeight,
+      this.gameState.height * (1 - this.gameState.groundHeight),
     );
     graphics.fill('#d26b4c');
 

@@ -14,14 +14,19 @@ export class GameState {
   public readonly width: number;
   public readonly height: number;
 
-  public readonly groundHeight: number = 180;
+  public readonly grassStartHeight = 0.6;
+  public readonly groundHeight: number = 0.85;
   public readonly noOfRocks: number = 50;
+  public readonly numberOfHills = 12;
+  public readonly numberOfTrees = 6;
+  public readonly numberOfGroundElements = 1;
 
   private readonly playerGround;
   private readonly brightnessLevels = [0, -0.3, -0.6];
   private readonly timeChange = 10000;
 
   private _brightnessIndex = 0;
+
   private _playerPositionY;
   private _playerPositionX = 150;
   private _jumpUp = true;
@@ -42,7 +47,7 @@ export class GameState {
     this.width = props.width;
     this.height = props.height;
 
-    this.playerGround = this.height - this.groundHeight - 94;
+    this.playerGround = this.height * this.groundHeight - 92;
 
     this._playerPositionY = this.playerGround;
 

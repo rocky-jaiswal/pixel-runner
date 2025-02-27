@@ -9,24 +9,31 @@ export class RandomGroundElement {
   private container = new Container();
   private elements: Sprite[] = [];
 
-  private allElements = {
-    house1: 635,
-    house2: 635,
-    tower1: 532,
-    tower2: 532,
-  };
+  private readonly numberOfElements: number;
+  private readonly allElements: Record<string, number>;
 
   constructor(gameState: GameState) {
     this.gameState = gameState;
+    this.numberOfElements = this.gameState.numberOfGroundElements;
+
+    const grassStartHeight = gameState.height * this.gameState.grassStartHeight;
+    this.allElements = {
+      house1: grassStartHeight - 80,
+      house2: grassStartHeight - 80,
+      tower1: grassStartHeight - 135,
+      tower2: grassStartHeight - 135,
+    };
 
     this.gameState.application.stage.addChild(this.container);
     this.init();
   }
 
   public init() {
-    const elem = this.addElement(null);
-    this.elements.push(elem);
-    this.container.addChild(elem);
+    if (this.numberOfElements > 0) {
+      const elem = this.addElement(null);
+      this.elements.push(elem);
+      this.container.addChild(elem);
+    }
   }
 
   private addElement(at: number | null) {
@@ -43,10 +50,12 @@ export class RandomGroundElement {
     if (this.gameState.isPlayerMoving) {
       // console.log(this.elements.length);
 
-      if (this.elements.length < 1) {
+      if (this.elements.length < this.numberOfElements) {
         const elem = this.addElement(this.gameState.width + 100);
         this.elements.push(elem);
         this.container.addChild(elem);
+
+        return;
       }
 
       this.elements.forEach((elem, idx) => {

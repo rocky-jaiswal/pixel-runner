@@ -46,6 +46,7 @@ export class FlyingEnemy {
 
     this.flyingAnim.position.x = this.gameState.playerPositionX + 100;
     this.flyingAnim.position.y = this.gameState.playerPositionY - 100;
+
     this.flyingAnim.anchor.set(0.5);
     this.flyingAnim.visible = true;
     this.flyingAnim.animationSpeed = this.gameState.gameSpeed * 0.0275;

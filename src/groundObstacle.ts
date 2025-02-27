@@ -33,7 +33,7 @@ export class GroundObstacle {
 
     const elem = Sprite.from(Object.keys(this.allElements)[idx]);
     elem.position.x = getRandomIntBetween(this.gameState.width, this.gameState.width + 100);
-    elem.position.y = this.gameState.height - this.gameState.groundHeight - Object.values(this.allElements)[idx];
+    elem.position.y = this.gameState.height * this.gameState.groundHeight - Object.values(this.allElements)[idx];
 
     return elem;
   }

@@ -17,9 +17,9 @@ export class GroundNoise {
   public init() {
     Array(this.gameState.noOfRocks)
       .fill(null)
-      .forEach((_, i) => {
+      .forEach(() => {
         const x = getRandomIntBetween(0, this.gameState.width);
-        const y = getRandomIntBetween(this.gameState.height - this.gameState.groundHeight, this.gameState.height);
+        const y = getRandomIntBetween(this.gameState.height * this.gameState.groundHeight, this.gameState.height);
 
         const rock = new Graphics();
         rock.position.set(x, y);

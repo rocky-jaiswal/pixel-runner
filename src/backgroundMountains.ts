@@ -1,5 +1,7 @@
-import { ColorMatrixFilter, Container, Graphics } from 'pixi.js';
+import { Container, Graphics } from 'pixi.js';
+
 import { GameState } from './gameState';
+import { getRandomInt } from './util';
 
 export class BackgroundMountains {
   private readonly gameState: GameState;
@@ -18,15 +20,11 @@ export class BackgroundMountains {
   }
 
   public init() {
-    // Create two mountain groups where one will be on the screen and the other will be off screen.
-    // When the first group moves off screen, it will be moved to the right of the second group.
     this.group1 = this.createMountainGroup();
     this.group2 = this.createMountainGroup();
 
-    // Position the 2nd group off the screen to the right.
     this.group2.x = this.gameState.width;
 
-    // Add the mountain groups to the stage.
     this.gameState.application.stage.addChild(this.group1, this.group2);
   }
 
@@ -35,11 +33,10 @@ export class BackgroundMountains {
     const graphics = new Graphics();
 
     // Width of all the mountains.
-    const width = (this.gameState.width / 2) * 1.2;
+    const width = (this.gameState.width / 2) * [1.1, 1.2, 1.3, 1.4, 1.5][getRandomInt(5)];
 
     // Starting point on the y-axis of all the mountains.
-    // This is the bottom of the screen.
-    const startY = this.gameState.height - 300;
+    const startY = this.gameState.height * 0.65;
 
     // Start point on the x-axis of the individual mountain.
     const startXLeft = 0;
@@ -99,12 +96,10 @@ export class BackgroundMountains {
 
   public update() {
     if (this.gameState.isPlayerMoving) {
-      // console.log(this.elements.length);
-
-      // Reposition the mountain groups when they move off screen.
       if (this.group1!.x <= -this.gameState.width) {
         this.group1!.x += this.gameState.width * 2;
       }
+
       if (this.group2!.x <= -this.gameState.width) {
         this.group2!.x += this.gameState.width * 2;
       }

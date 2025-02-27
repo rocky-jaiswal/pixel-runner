@@ -11,10 +11,10 @@ export class RandomCloudElement {
   private brightness: number | null = null;
 
   private allElements = {
-    cloud1: 50,
-    cloud2: 60,
-    cloud3: 65,
-    cloud4: 70,
+    cloud1: 30,
+    cloud2: 35,
+    cloud3: 40,
+    cloud4: 45,
   };
 
   constructor(gameState: GameState) {

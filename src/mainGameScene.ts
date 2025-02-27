@@ -43,13 +43,13 @@ export class MainGameScene extends Container implements GameScene {
     this.gameBackgroundSky = new GameBackgroundSky(this.gameState);
     this.backgroundMountains = new BackgroundMountains(this.gameState);
     this.gameBackgroundGrass = new GameBackgroundGrass(this.gameState);
+    this.randomElement1 = new RandomCloudElement(this.gameState); // cloud
+
+    this.randomTrees = new RandomTrees(this.gameState);
+    this.randomElement2 = new RandomGroundElement(this.gameState); // towers and houses
 
     this.ground = new Ground(this.gameState);
     this.groundNoise = new GroundNoise(this.gameState);
-
-    this.randomTrees = new RandomTrees(this.gameState);
-    this.randomElement1 = new RandomCloudElement(this.gameState);
-    this.randomElement2 = new RandomGroundElement(this.gameState); // towers and houses
 
     this.player = new Player(this.gameState);
     await this.player.init();
