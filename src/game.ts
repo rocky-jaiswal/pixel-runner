@@ -1,6 +1,5 @@
 import { Ticker, Assets } from 'pixi.js';
 
-import backgroundGrassPNG from './assets/images/backgroundGrass.png';
 import cloud1PNG from './assets/images/cloud1.png';
 import cloud2PNG from './assets/images/cloud2.png';
 import cloud3PNG from './assets/images/cloud3.png';
@@ -9,9 +8,16 @@ import house1PNG from './assets/images/house1.png';
 import house2PNG from './assets/images/house2.png';
 import tower1PNG from './assets/images/tower1.png';
 import tower2PNG from './assets/images/tower2.png';
+
+import tree1PNG from './assets/images/tree1.png';
+import tree2PNG from './assets/images/tree2.png';
+import tree3PNG from './assets/images/tree3.png';
+import tree4PNG from './assets/images/tree4.png';
+
 import bushPNG from './assets/images/bushO.png';
 import mushroomPNG from './assets/images/mushroom.png';
 import stonePNG from './assets/images/stone.png';
+
 import player1PNG from './assets/images/female_sheet_2.png';
 import flyEnemyPNG from './assets/images/fly_sheet_2.png';
 
@@ -34,8 +40,20 @@ export class Game {
   public async init() {
     await Assets.load([
       {
-        src: backgroundGrassPNG,
-        alias: 'backgroundGrass',
+        src: tree1PNG,
+        alias: 'tree1',
+      },
+      {
+        src: tree2PNG,
+        alias: 'tree2',
+      },
+      {
+        src: tree3PNG,
+        alias: 'tree3',
+      },
+      {
+        src: tree4PNG,
+        alias: 'tree4',
       },
       {
         src: cloud1PNG,

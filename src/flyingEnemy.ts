@@ -34,7 +34,7 @@ export class FlyingEnemy {
         scale: 1,
       },
       animations: {
-        flying: ['f0', 'f1', 'f2', 'f3', 'f4'],
+        flying: ['f0', 'f1', 'f2', 'f3', 'f4', 'f3', 'f2'],
       },
     };
 

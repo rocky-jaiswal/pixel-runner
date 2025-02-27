@@ -2,23 +2,23 @@
 ## Basics
 
 - to do sample ✅
-- Load (infinite) background
-- Load (infinite) floor
-- Add random ground noise / clouds / grass / houses in background  (with movement / animation)
-- Load (animated sprite) player
+- Load (infinite) background  ✅
+- Load (infinite) floor ✅
+- Add random ground noise / clouds / grass / houses in background  (with movement / animation) ✅
+- Load (animated sprite) player ✅
 
 
 ## Main game
 
-- Move player (animated) on the floor
-- Day / night cycle
-- Game speed changes with time
+- Move player (animated) on the floor ✅
+- Day / night cycle ✅
+- Game speed changes with time ✅
 
 - Keyboard events and animations 
-    - up -> jump
-    - down -> duck
+    - up -> jump ✅
+    - down -> duck ✅
 - Load random obstacles (animated)
-    - On ground
+    - On ground ✅
     - In air
 - Collision detection
 - End screen
