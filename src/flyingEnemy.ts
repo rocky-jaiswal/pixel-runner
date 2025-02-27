@@ -6,7 +6,6 @@ export class FlyingEnemy {
   private readonly gameState: GameState;
 
   private flyingAnim: AnimatedSprite | null = null;
-  //   private animSpeed: number | null = null;
 
   constructor(gameState: GameState) {
     this.gameState = gameState;
@@ -44,7 +43,7 @@ export class FlyingEnemy {
 
     this.flyingAnim = new AnimatedSprite(spritesheet.animations.flying);
 
-    this.flyingAnim.position.x = this.gameState.playerPositionX + 100;
+    this.flyingAnim.position.x = this.gameState.width + 100;
     this.flyingAnim.position.y = this.gameState.playerPositionY - 100;
 
     this.flyingAnim.anchor.set(0.5);
@@ -52,9 +51,19 @@ export class FlyingEnemy {
     this.flyingAnim.animationSpeed = this.gameState.gameSpeed * 0.0275;
     this.flyingAnim.play();
 
-    // add it to the stage to render
     this.gameState.application.stage.addChild(this.flyingAnim);
   }
 
-  public update() {}
+  public update() {
+    if (this.gameState.isPlayerMoving) {
+      // console.log(this.elements.length);
+
+      if (this.flyingAnim!.position.x + this.flyingAnim!.width <= 0) {
+        this.flyingAnim!.position.x = this.gameState.width + 100;
+        return;
+      }
+
+      this.flyingAnim!.position.x -= this.gameState.gameSpeed;
+    }
+  }
 }

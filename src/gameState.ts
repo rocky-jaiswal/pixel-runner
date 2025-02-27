@@ -29,6 +29,7 @@ export class GameState {
 
   private _playerPositionY;
   private _playerPositionX = 150;
+
   private _jumpUp = true;
   private _jumpTimer: NodeJS.Timeout | null = null;
   private _duckTimer: NodeJS.Timeout | null = null;
@@ -46,12 +47,12 @@ export class GameState {
 
     this.width = props.width;
     this.height = props.height;
+    console.log({ w: this.width, h: this.height });
 
     this.playerGround = this.height * this.groundHeight - 92;
 
+    // when not jumping
     this._playerPositionY = this.playerGround;
-
-    console.log({ w: this.width, h: this.height });
 
     // Add event handlers
     this.eventEmitter.addListener('keydown', (ev) => this.handleKeyDown(ev));
@@ -112,8 +113,6 @@ export class GameState {
   }
 
   private handleJump() {
-    // console.log(this.playerGround);
-    // console.log(this._playerPositionY);
     if (!this._jumpUp && this._playerPositionY === this.playerGround) {
       this.isPlayerJumping = false; // jump is complete
       this._jumpUp = true; // set back jump direction

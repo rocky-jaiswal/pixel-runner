@@ -20,8 +20,11 @@
 - Load random obstacles (animated)
     - On ground ✅
     - In air
-- Collision detection
-- End screen
+- Core gameplay
+    - random enemy generation (air + ground)
+    - Collision detection
+- Game end
+    - end screen
 - Sounds
 - Scoring
     - Show score + high score
