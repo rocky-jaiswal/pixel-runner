@@ -1,13 +1,22 @@
 import { Container, Sprite } from 'pixi.js';
 
-import { GameState } from './gameState';
-import { getRandomInt, getRandomIntBetween } from './util';
+import { Enemy, GameState } from './gameState';
+import { getRandomInt } from './util';
+
+class GroundEnemy {
+  public readonly id: string;
+  public readonly sprite: Sprite;
+
+  constructor(id: string, sprite: Sprite) {
+    this.id = id;
+    this.sprite = sprite;
+  }
+}
 
 export class GroundObstacle {
   private readonly gameState: GameState;
-
   private container = new Container();
-  private elements: Sprite[] = [];
+  private elements: GroundEnemy[] = [];
 
   private allElements = {
     bush: 65,
@@ -19,42 +28,41 @@ export class GroundObstacle {
     this.gameState = gameState;
 
     this.gameState.application.stage.addChild(this.container);
-    this.init();
   }
 
-  public init() {
-    const elem = this.addElement();
-    this.elements.push(elem);
-    this.container.addChild(elem);
-  }
-
-  private addElement() {
+  private addEnemy(enemy: Enemy) {
     const idx = getRandomInt(Object.keys(this.allElements).length);
 
-    const elem = Sprite.from(Object.keys(this.allElements)[idx]);
-    elem.position.x = getRandomIntBetween(this.gameState.width, this.gameState.width + 100);
-    elem.position.y = this.gameState.height * this.gameState.groundHeight - Object.values(this.allElements)[idx];
+    const sprite = Sprite.from(Object.keys(this.allElements)[idx]);
+    sprite.position.x = enemy.position;
+    sprite.position.y = this.gameState.height * this.gameState.groundHeight - Object.values(this.allElements)[idx];
 
-    return elem;
+    this.elements.push(new GroundEnemy(enemy.id, sprite));
+    this.container.addChild(sprite);
   }
 
   public update() {
     if (this.gameState.isPlayerMoving) {
-      // console.log(this.elements.length);
+      const groundEnemies = this.gameState.enemies.filter((e) => e.type === 'g');
 
-      if (this.elements.length < 1) {
-        const elem = this.addElement();
-        this.elements.push(elem);
-        this.container.addChild(elem);
-      }
+      groundEnemies.forEach((enemy) => {
+        if (!enemy.rendered) {
+          this.addEnemy(enemy);
+          enemy.rendered = true;
+        }
+      });
 
       this.elements.forEach((elem, idx) => {
-        if (elem.renderable) {
-          elem.position.x -= this.gameState.gameSpeed;
+        const match = groundEnemies.find((e) => e.id === elem.id);
+
+        if (elem.sprite.renderable) {
+          elem.sprite.position.x -= this.gameState.gameSpeed;
+          match!.position = elem.sprite.position.x;
         }
 
-        if (elem.position.x + elem.width <= 0) {
-          elem.renderable = false;
+        if (elem.sprite.position.x + elem.sprite.width <= 0) {
+          elem.sprite.renderable = false;
+          match!.isPast = true;
           this.elements.splice(idx, 1);
         }
       });

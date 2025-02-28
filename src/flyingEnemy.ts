@@ -1,14 +1,27 @@
-import { AnimatedSprite, Spritesheet, Texture } from 'pixi.js';
+import { AnimatedSprite, Container, Spritesheet, Texture } from 'pixi.js';
 
-import { GameState } from './gameState';
+import { Enemy, GameState } from './gameState';
+
+class FlyngEnemy {
+  public readonly id: string;
+  public readonly sprite: AnimatedSprite;
+
+  constructor(id: string, sprite: AnimatedSprite) {
+    this.id = id;
+    this.sprite = sprite;
+  }
+}
 
 export class FlyingEnemy {
   private readonly gameState: GameState;
-
-  private flyingAnim: AnimatedSprite | null = null;
+  private container = new Container();
+  private spritesheet: Spritesheet | null = null;
+  private elements: FlyngEnemy[] = [];
 
   constructor(gameState: GameState) {
     this.gameState = gameState;
+
+    this.gameState.application.stage.addChild(this.container);
   }
 
   public async init() {
@@ -38,32 +51,50 @@ export class FlyingEnemy {
     };
 
     // TODO: Can pull this up in game state setup (to avoid async / await)
-    const spritesheet = new Spritesheet(Texture.from('flyingEnemy'), atlasData);
-    await spritesheet.parse();
+    this.spritesheet = new Spritesheet(Texture.from('flyingEnemy'), atlasData);
+    this.spritesheet.parse();
+  }
 
-    this.flyingAnim = new AnimatedSprite(spritesheet.animations.flying);
+  private addEnemy(enemy: Enemy) {
+    const flyingAnimatedSprite = new AnimatedSprite(this.spritesheet!.animations.flying);
 
-    this.flyingAnim.position.x = this.gameState.width + 100;
-    this.flyingAnim.position.y = this.gameState.playerPositionY - 100;
+    flyingAnimatedSprite.position.x = enemy.position;
+    flyingAnimatedSprite.position.y = this.gameState.playerGround - 90;
 
-    this.flyingAnim.anchor.set(0.5);
-    this.flyingAnim.visible = true;
-    this.flyingAnim.animationSpeed = this.gameState.gameSpeed * 0.0275;
-    this.flyingAnim.play();
+    flyingAnimatedSprite.anchor.set(0.5);
+    flyingAnimatedSprite.visible = true;
+    flyingAnimatedSprite.animationSpeed = this.gameState.gameSpeed * 0.0275;
+    flyingAnimatedSprite.play();
 
-    this.gameState.application.stage.addChild(this.flyingAnim);
+    this.elements.push(new FlyngEnemy(enemy.id, flyingAnimatedSprite));
+    this.container.addChild(flyingAnimatedSprite);
   }
 
   public update() {
     if (this.gameState.isPlayerMoving) {
-      // console.log(this.elements.length);
+      const enemies = this.gameState.enemies.filter((e) => e.type === 'a');
 
-      if (this.flyingAnim!.position.x + this.flyingAnim!.width <= 0) {
-        this.flyingAnim!.position.x = this.gameState.width + 100;
-        return;
-      }
+      enemies.forEach((enemy) => {
+        if (!enemy.rendered) {
+          this.addEnemy(enemy);
+          enemy.rendered = true;
+        }
+      });
 
-      this.flyingAnim!.position.x -= this.gameState.gameSpeed;
+      this.elements.forEach((elem, idx) => {
+        const match = enemies.find((e) => e.id === elem.id);
+
+        if (elem.sprite.renderable) {
+          elem.sprite.position.x -= this.gameState.gameSpeed;
+          match!.position = elem.sprite.position.x;
+        }
+
+        if (elem.sprite.position.x + elem.sprite.width <= 0) {
+          elem.sprite.renderable = false;
+          match!.isPast = true;
+          this.elements.splice(idx, 1);
+        }
+      });
     }
   }
 }
