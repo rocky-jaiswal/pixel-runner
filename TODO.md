@@ -32,6 +32,7 @@
 
 ## Release
 
+- Favicons
 - Responsive for different screen sizes
 - Mobile support?
 

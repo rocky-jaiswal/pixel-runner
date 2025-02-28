@@ -9,7 +9,7 @@ export class GameBackgroundGrass {
   private readonly colorMatrix;
   private readonly pos: Record<number, any>;
   private readonly numberOfHills: number;
-  private readonly grassColor = '#26ab6d';
+  private readonly grassColor = '#00bd65';
 
   private brightness: number | null = null;
 

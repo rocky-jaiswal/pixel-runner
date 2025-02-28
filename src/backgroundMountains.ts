@@ -44,9 +44,9 @@ export class BackgroundMountains {
     const startXRight = this.gameState.width / 2;
 
     // Height of the individual mountain.
-    const heightLeft = this.gameState.height / 2;
-    const heightMiddle = (this.gameState.height * 4) / 6;
-    const heightRight = (this.gameState.height * 2) / 3;
+    const heightLeft = this.gameState.height / 2.2;
+    const heightMiddle = (this.gameState.height * 4) / 6.3;
+    const heightRight = (this.gameState.height * 2) / 3.2;
 
     // Color of the individual mountain.
     const colorLeft = '#54826d';
