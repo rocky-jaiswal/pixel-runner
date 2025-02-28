@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { startApp } from './main';
+import { main } from './main';
 import './css/style.css';
 
 let started = false;
@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     if (!started) {
       console.log('starting pixi...');
-      startApp();
+      main();
       started = true;
     }
   }, [started]);
@@ -23,7 +23,7 @@ function App() {
       <div id="scorecard">
         <div className="scores"></div>
         <div className="actions-game">
-          <button id="reset-game-btn">
+          <button id="reset-game-btn" onClick={() => document.location.reload()}>
             <span>Restart 🔁</span>
           </button>
           <button className="help-button">

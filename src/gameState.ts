@@ -1,4 +1,4 @@
-import { Application, EventEmitter } from 'pixi.js';
+import { Application, EventEmitter, Spritesheet } from 'pixi.js';
 import { getRandomInt, getRandomIntBetween } from './util';
 
 interface Props {
@@ -53,12 +53,16 @@ export class GameState {
   private _jumpTimer: NodeJS.Timeout | null = null;
   private _duckTimer: NodeJS.Timeout | null = null;
 
+  public playerSpriteSheet: Spritesheet | null = null;
+  public flyingEnemySpriteSheet: Spritesheet | null = null;
+
   public isPlayerMoving: boolean = false;
   public isPlayerJumping: boolean = false;
   public isPlayerDucking: boolean = false;
 
   public gameSpeed: number = 8;
   public gameEnded: boolean = false;
+  public worldStopped: boolean = false;
 
   private _enemyReleaseTimer: NodeJS.Timeout | null = null;
   public enemies: Enemy[] = [];
@@ -81,17 +85,17 @@ export class GameState {
     this.eventEmitter.addListener('changeTime', () => this.changeBrightness());
     this.eventEmitter.addListener('changeGameSpeed', () => this.changeGameSpeed());
     this.eventEmitter.addListener('releaseEnemy', () => this.releaseEnemy());
-
-    // change light cycle
-    setInterval(() => {
-      this.changeGameDynamics();
-    }, this.timeChange);
   }
 
   private handleKeyDown(ev: KeyboardEvent) {
     if (ev.key === ' ' || ev.key === 'ArrowUp') {
       if (!this.isPlayerMoving) {
         this.isPlayerMoving = true;
+
+        // change light cycle
+        setInterval(() => {
+          this.changeGameDynamics();
+        }, this.timeChange);
 
         // release enemies
         this.eventEmitter.emit('releaseEnemy');
@@ -116,6 +120,10 @@ export class GameState {
           this.handleDuck();
         }, 500);
       }
+    }
+
+    if (ev.key === 'x') {
+      this.gameEnded = true;
     }
   }
 

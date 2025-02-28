@@ -1,4 +1,4 @@
-import { AnimatedSprite, Container, Spritesheet, Texture } from 'pixi.js';
+import { AnimatedSprite, Container } from 'pixi.js';
 
 import { Enemy, GameState } from './gameState';
 
@@ -14,8 +14,8 @@ class FlyngEnemy {
 
 export class FlyingEnemy {
   private readonly gameState: GameState;
+
   private container = new Container();
-  private spritesheet: Spritesheet | null = null;
   private elements: FlyngEnemy[] = [];
 
   constructor(gameState: GameState) {
@@ -24,39 +24,8 @@ export class FlyingEnemy {
     this.gameState.application.stage.addChild(this.container);
   }
 
-  public async init() {
-    const frames = Array(13)
-      .fill(null)
-      .map((_, i) => {
-        return {
-          [`f${i}`]: {
-            frame: { x: i * 108, y: 5, w: 108, h: 65 },
-            sourceSize: { w: 108, h: 65 },
-          },
-        };
-      })
-      .reduce((acc, obj) => {
-        acc[Object.keys(obj)[0]] = Object.values(obj)[0];
-        return acc;
-      }, {});
-
-    const atlasData = {
-      frames,
-      meta: {
-        scale: 1,
-      },
-      animations: {
-        flying: ['f0', 'f1', 'f2', 'f3', 'f4', 'f3', 'f2'],
-      },
-    };
-
-    // TODO: Can pull this up in game state setup (to avoid async / await)
-    this.spritesheet = new Spritesheet(Texture.from('flyingEnemy'), atlasData);
-    this.spritesheet.parse();
-  }
-
   private addEnemy(enemy: Enemy) {
-    const flyingAnimatedSprite = new AnimatedSprite(this.spritesheet!.animations.flying);
+    const flyingAnimatedSprite = new AnimatedSprite(this.gameState.flyingEnemySpriteSheet!.animations.flying);
 
     flyingAnimatedSprite.position.x = enemy.position;
     flyingAnimatedSprite.position.y = this.gameState.playerGround - 90;

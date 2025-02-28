@@ -1,4 +1,4 @@
-import { AnimatedSprite, Spritesheet, Texture } from 'pixi.js';
+import { AnimatedSprite } from 'pixi.js';
 
 import { GameState } from './gameState';
 
@@ -8,44 +8,15 @@ export class Player {
   private runningAnim: AnimatedSprite | null = null;
   private jumpingAnim: AnimatedSprite | null = null;
   private duckingAnim: AnimatedSprite | null = null;
+  private endingAnim: AnimatedSprite | null = null;
   private animSpeed: number | null = null;
 
   constructor(gameState: GameState) {
     this.gameState = gameState;
   }
 
-  public async init() {
-    const frames = Array(13)
-      .fill(null)
-      .map((_, i) => {
-        return {
-          [`f${i}`]: {
-            frame: { x: i * 192, y: 5, w: 192, h: 224 },
-            sourceSize: { w: 192, h: 223 },
-          },
-        };
-      })
-      .reduce((acc, obj) => {
-        acc[Object.keys(obj)[0]] = Object.values(obj)[0];
-        return acc;
-      }, {});
-
-    const atlasData = {
-      frames,
-      meta: {
-        scale: 1,
-      },
-      animations: {
-        running: ['f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7'],
-        jumping: ['f9'],
-        ducking: ['f10'],
-      },
-    };
-
-    // TODO: Can pull this up in game state setup (to avoid async / await)
-    const spritesheet = new Spritesheet(Texture.from('player'), atlasData);
-    await spritesheet.parse();
-
+  public init() {
+    const spritesheet = this.gameState.playerSpriteSheet!;
     this.runningAnim = new AnimatedSprite(spritesheet.animations.running);
 
     this.runningAnim.position.x = this.gameState.playerPositionX;
@@ -66,10 +37,18 @@ export class Player {
     this.duckingAnim.anchor.set(0.5);
     this.duckingAnim.visible = false;
 
+    this.endingAnim = new AnimatedSprite(spritesheet.animations.ending);
+
+    this.endingAnim.position.x = this.gameState.playerPositionX;
+    this.endingAnim.position.y = this.gameState.playerPositionY;
+    this.endingAnim.anchor.set(0.5);
+    this.endingAnim.visible = false;
+
     // add it to the stage to render
     this.gameState.application.stage.addChild(this.runningAnim);
     this.gameState.application.stage.addChild(this.jumpingAnim);
     this.gameState.application.stage.addChild(this.duckingAnim);
+    this.gameState.application.stage.addChild(this.endingAnim);
   }
 
   public update() {
@@ -80,6 +59,16 @@ export class Player {
         this.runningAnim!.animationSpeed = this.animSpeed;
         this.jumpingAnim!.animationSpeed = this.animSpeed;
         this.duckingAnim!.animationSpeed = this.animSpeed;
+        this.endingAnim!.animationSpeed = this.animSpeed;
+      }
+
+      if (this.gameState.gameEnded) {
+        this.runningAnim!.visible = false;
+        this.duckingAnim!.visible = false;
+        this.jumpingAnim!.visible = false;
+
+        this.endingAnim!.visible = true;
+        return;
       }
 
       if (this.gameState.isPlayerJumping) {

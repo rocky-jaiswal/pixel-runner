@@ -2,7 +2,7 @@ import { EventEmitter } from 'pixi.js';
 
 import { createApp } from './app';
 
-export const startApp = async () => {
+export const main = async () => {
   const elem = document.querySelector<HTMLDivElement>('#app');
 
   if (!elem) {

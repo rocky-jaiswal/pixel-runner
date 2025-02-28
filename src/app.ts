@@ -12,7 +12,7 @@ export const createApp = async (elem: HTMLDivElement, eventEmitter: EventEmitter
 
   // Intialize the application.
   await application.init({
-    background: '#cccccc',
+    background: '#cfeffc',
     antialias: true,
     width,
     height,

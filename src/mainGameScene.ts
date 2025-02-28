@@ -28,7 +28,7 @@ export class MainGameScene extends Container implements GameScene {
   private randomElement1: RandomCloudElement | null = null;
   private randomElement2: RandomGroundElement | null = null;
 
-  private player: Player | null = null;
+  public player: Player | null = null;
   private groundObstacle: GroundObstacle | null = null;
   private flyingEnemy: FlyingEnemy | null = null;
 
@@ -51,32 +51,31 @@ export class MainGameScene extends Container implements GameScene {
     this.ground = new Ground(this.gameState);
     this.groundNoise = new GroundNoise(this.gameState);
 
-    this.player = new Player(this.gameState);
-    await this.player.init();
-
     this.flyingEnemy = new FlyingEnemy(this.gameState);
-    await this.flyingEnemy.init();
-
     this.groundObstacle = new GroundObstacle(this.gameState);
+
+    this.player = new Player(this.gameState);
+    this.player.init();
   }
 
   public update(_delta: Ticker) {
-    // console.log({ delta, state: this.gameState });
-    this.gameBackgroundSky?.update();
-    this.gameBackgroundGrass?.update();
-    this.backgroundMountains?.update();
+    if (!this.gameState.gameEnded) {
+      this.gameBackgroundSky?.update();
+      this.gameBackgroundGrass?.update();
+      this.backgroundMountains?.update();
 
-    this.ground?.update();
-    this.groundNoise?.update();
+      this.ground?.update();
+      this.groundNoise?.update();
 
-    this.randomTrees?.update();
-    this.randomElement1?.update();
-    this.randomElement2?.update();
+      this.randomTrees?.update();
+      this.randomElement1?.update();
+      this.randomElement2?.update();
 
-    this.player?.update();
+      this.player?.update();
 
-    this.groundObstacle?.update();
-    this.flyingEnemy?.update();
+      this.groundObstacle?.update();
+      this.flyingEnemy?.update();
+    }
   }
 
   public cleanup() {
