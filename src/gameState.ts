@@ -43,15 +43,18 @@ export class GameState {
 
   private _brightnessIndex = 0;
 
-  private _playerPositionY;
   private _playerPositionX = 150;
+  private _playerPositionY: number;
+  private _playerGroundPosition: number;
 
   private _jumpUp = true;
   private _jumpHeight = 115;
   private _jumpStep = 7.5;
 
+  private _gameTimer: NodeJS.Timeout | null = null;
   private _jumpTimer: NodeJS.Timeout | null = null;
   private _duckTimer: NodeJS.Timeout | null = null;
+  private _enemyReleaseTimer: NodeJS.Timeout | null = null;
 
   public playerSpriteSheet: Spritesheet | null = null;
   public flyingEnemySpriteSheet: Spritesheet | null = null;
@@ -64,8 +67,8 @@ export class GameState {
   public gameEnded: boolean = false;
   public worldStopped: boolean = false;
 
-  private _enemyReleaseTimer: NodeJS.Timeout | null = null;
   public enemies: Enemy[] = [];
+  public score: number = 0;
 
   constructor(props: Props) {
     this.application = props.application;
@@ -75,7 +78,8 @@ export class GameState {
     this.height = props.height;
     console.log({ w: this.width, h: this.height });
 
-    this.playerGround = this.height * this.groundHeight - 92;
+    this._playerGroundPosition = this.height * this.groundHeight - 92;
+    this.playerGround = this._playerGroundPosition;
 
     // when not jumping
     this._playerPositionY = this.playerGround;
@@ -85,6 +89,8 @@ export class GameState {
     this.eventEmitter.addListener('changeTime', () => this.changeBrightness());
     this.eventEmitter.addListener('changeGameSpeed', () => this.changeGameSpeed());
     this.eventEmitter.addListener('releaseEnemy', () => this.releaseEnemy());
+    this.eventEmitter.addListener('updateScore', () => this.updateScore());
+    this.eventEmitter.addListener('gameEnded', () => this.endGame());
   }
 
   private handleKeyDown(ev: KeyboardEvent) {
@@ -93,7 +99,7 @@ export class GameState {
         this.isPlayerMoving = true;
 
         // change light cycle
-        setInterval(() => {
+        this._gameTimer = setInterval(() => {
           this.changeGameDynamics();
         }, this.timeChange);
 
@@ -123,7 +129,7 @@ export class GameState {
     }
 
     if (ev.key === 'x') {
-      this.gameEnded = true;
+      this.eventEmitter.emit('gameEnded');
     }
   }
 
@@ -192,6 +198,36 @@ export class GameState {
         },
         getRandomIntBetween(1225, 1550),
       );
+    }
+  }
+
+  private updateScore() {
+    this.score += this.gameSpeed * 0.01;
+    this.eventEmitter.emit('changeScore', Math.ceil(this.score));
+  }
+
+  private endGame() {
+    this.gameEnded = true;
+
+    this._playerPositionY = this._playerGroundPosition;
+
+    if (this._enemyReleaseTimer) {
+      clearInterval(this._enemyReleaseTimer);
+    }
+    if (this._jumpTimer) {
+      clearInterval(this._jumpTimer);
+    }
+    if (this._duckTimer) {
+      clearInterval(this._duckTimer);
+    }
+    if (this._gameTimer) {
+      clearInterval(this._gameTimer);
+    }
+
+    const highScore = localStorage.getItem('_pixel_runner_high_score') ?? '0';
+
+    if (this.score > parseInt(highScore)) {
+      localStorage.setItem('_pixel_runner_high_score', Math.ceil(this.score).toString());
     }
   }
 

@@ -60,7 +60,7 @@ main {
 #scorecard {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 50px;
   width: 85vw;
@@ -72,12 +72,12 @@ main {
 
 .scores {
   display: flex;
-  width: 80%;
+  padding: 0 5px;
 }
 
 .score {
   font-family: 'Jersey 10', serif;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: 400;
   font-style: normal;
 }

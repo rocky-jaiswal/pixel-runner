@@ -76,6 +76,10 @@ export class MainGameScene extends Container implements GameScene {
       this.groundObstacle?.update();
       this.flyingEnemy?.update();
     }
+
+    if (this.gameState.isPlayerMoving && !this.gameState.gameEnded) {
+      this.gameState.eventEmitter.emit('updateScore');
+    }
   }
 
   public cleanup() {
