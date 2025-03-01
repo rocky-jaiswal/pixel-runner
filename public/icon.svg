@@ -1,80 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   id="visual"
-   viewBox="0 0 512 512"
-   width="512"
-   height="512"
-   version="1.1"
-   sodipodi:docname="icon.svg"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
-   inkscape:export-filename="icon.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1">
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect4"
-       is_visible="true"
-       lpeversion="1" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect3"
-       is_visible="true"
-       lpeversion="1" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect2"
-       is_visible="true"
-       lpeversion="1" />
-  </defs>
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="2.2792969"
-     inkscape:cx="255.56127"
-     inkscape:cy="256"
-     inkscape:window-width="2560"
-     inkscape:window-height="1376"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="visual" />
-  <rect
-     x="0"
-     y="0"
-     width="512"
-     height="512"
-     fill="#002233"
-     id="rect1"
-     inkscape:label="rect1"
-     style="fill:#001d33;fill-opacity:1" />
-  <g
-     inkscape:groupmode="layer"
-     id="layer1"
-     inkscape:label="Layer 1">
-    <path
-       style="fill:#2ad4ff;stroke-width:1.75748;paint-order:stroke fill markers"
-       d="m 1.7549272,259.72922 c 9.2046698,-15.89336 19.3697468,-31.59321 33.3057888,-43.55613 6.968021,-5.98146 14.84792,-10.96849 23.443147,-14.20164 8.595227,-3.23315 17.921824,-4.679 27.048836,-3.66468 10.131607,1.12596 19.734631,5.22104 28.518491,10.39415 8.78386,5.17311 16.86802,11.43362 25.17507,17.34211 8.30704,5.90849 16.93762,11.51975 26.44658,15.19357 9.50896,3.67381 20.02539,5.32612 29.98154,3.13701 8.65577,-1.90319 16.50419,-6.61721 23.16834,-12.45961 6.66415,-5.8424 12.24283,-12.80548 17.6068,-19.86044 5.36398,-7.05495 10.56775,-14.26165 16.61879,-20.73694 6.05105,-6.4753 13.03012,-12.24764 21.13906,-15.8239 12.15203,-5.35937 26.21248,-5.42116 39.02848,-1.9362 12.816,3.48496 24.50713,10.31593 35.12519,18.29413 21.2361,15.9564 38.9325,36.80603 62.29192,49.45184 30.48132,16.50131 66.65548,17.06989 100.90831,22.37532 91.60645,14.18894 176.47607,66.14166 232.12625,140.27751 55.65019,74.13585 81.81367,169.45413 73.48812,261.7783 -8.32555,92.32417 -50.72182,180.91367 -116.2062,246.52513 -65.48438,65.61146 -153.39819,108.03035 -245.29993,120.16035 -91.90175,12.13 -187.27496,-5.8138 -269.30272,-48.99383 C 104.33903,940.24525 35.870799,872.22265 -9.3684109,791.31233 -54.60762,710.402 -76.67086,616.95583 -74.14595,524.29143 -71.62104,431.62702 -44.702826,339.94608 1.7549272,259.72922 Z"
-       id="path3"
-       inkscape:path-effect="#path-effect4"
-       inkscape:original-d="m 1.7549272,259.72922 c -169.9354472,-1.3162 55.7189378,-40.9483 83.7977718,-61.42245 28.078831,-20.47415 73.414451,30.56498 110.121681,46.06684 36.70723,15.50185 52.06284,-45.77435 78.53299,-68.88089 26.47015,-23.10654 91.10997,43.72693 136.44559,65.80977 45.33561,22.08283 67.2722,14.91688 100.90831,22.37532 33.6361,7.45844 -339.8709,-2.63239 -509.8063428,-3.94859 z"
-       transform="matrix(0.57160111,0,0,0.30002868,44.491914,200.53748)" />
-    <path
-       d="M0 437L12.2 420.8C24.3 404.7 48.7 372.3 73 371.5C97.3 370.7 121.7 401.3 146 417.7C170.3 434 194.7 436 219.2 430.8C243.7 425.7 268.3 413.3 292.8 393.7C317.3 374 341.7 347 366 335.5C390.3 324 414.7 328 439 341.5C463.3 355 487.7 378 499.8 389.5L512 401L512 513L499.8 513C487.7 513 463.3 513 439 513C414.7 513 390.3 513 366 513C341.7 513 317.3 513 292.8 513C268.3 513 243.7 513 219.2 513C194.7 513 170.3 513 146 513C121.7 513 97.3 513 73 513C48.7 513 24.3 513 12.2 513L0 513Z"
-       fill="#0066FF"
-       stroke-linecap="round"
-       stroke-linejoin="miter"
-       id="path1" />
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="512" height="512"><svg id="SvgjsSvg1015" viewBox="0 0 512 512" width="512" height="512" version="1.1" sodipodi:docname="wave-haikei(1).svg" inkscape:version="1.4 (e7c3feb100, 2024-10-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="SvgjsDefs1014"></defs>
+  <sodipodi:namedview id="SvgjsSodipodi:namedview1013" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:zoom="2.265625" inkscape:cx="256" inkscape:cy="256" inkscape:window-width="2560" inkscape:window-height="1371" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="visual"></sodipodi:namedview>
+  <rect x="0" y="0" width="512" height="512" fill="#65c3f3" id="SvgjsRect1012"></rect>
+  <path d="M0 427L12.2 419.2C24.3 411.3 48.7 395.7 73 380.5C97.3 365.3 121.7 350.7 146 350.3C170.3 350 194.7 364 219.2 376.8C243.7 389.7 268.3 401.3 292.8 407.7C317.3 414 341.7 415 366 415.3C390.3 415.7 414.7 415.3 439 405.7C463.3 396 487.7 377 499.8 367.5L512 358L512 513L499.8 513C487.7 513 463.3 513 439 513C414.7 513 390.3 513 366 513C341.7 513 317.3 513 292.8 513C268.3 513 243.7 513 219.2 513C194.7 513 170.3 513 146 513C121.7 513 97.3 513 73 513C48.7 513 24.3 513 12.2 513L0 513Z" fill="#00ff8b" stroke-linecap="round" stroke-linejoin="miter" id="SvgjsPath1011"></path>
+  <ellipse style="fill:#ff9955;stroke-width:1.43399" id="SvgjsEllipse1010" cx="91.8069" cy="382.01379" rx="64.441383" ry="65.54483"></ellipse>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
