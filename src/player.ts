@@ -67,6 +67,7 @@ export class Player {
         this.duckingAnim!.visible = false;
         this.jumpingAnim!.visible = false;
 
+        this.endingAnim!.position.y = this.gameState.playerPositionY;
         this.endingAnim!.visible = true;
         return;
       }
@@ -109,6 +110,7 @@ export class Player {
       this.runningAnim!.position.y = this.gameState.playerPositionY;
       this.jumpingAnim!.position.y = this.gameState.playerPositionY;
       this.duckingAnim!.position.y = this.gameState.playerPositionY;
+      this.endingAnim!.position.y = this.gameState.playerPositionY;
     }
   }
 }

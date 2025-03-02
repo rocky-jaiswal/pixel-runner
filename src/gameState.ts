@@ -207,10 +207,6 @@ export class GameState {
   }
 
   private endGame() {
-    this.gameEnded = true;
-
-    this._playerPositionY = this._playerGroundPosition;
-
     if (this._enemyReleaseTimer) {
       clearInterval(this._enemyReleaseTimer);
     }
@@ -229,6 +225,9 @@ export class GameState {
     if (this.score > parseInt(highScore)) {
       localStorage.setItem('_pixel_runner_high_score', Math.ceil(this.score).toString());
     }
+
+    this._playerPositionY = this._playerGroundPosition + 5;
+    this.gameEnded = true;
   }
 
   public get playerPositionX() {

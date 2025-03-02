@@ -4,27 +4,29 @@ import { EventEmitter } from 'pixi.js';
 import { main } from './main';
 import './css/style.css';
 
-let started = false;
 const eventEmitter = new EventEmitter();
 const highScore = localStorage.getItem('_pixel_runner_high_score') ?? '0'
 
 function App() {
   const eventEmitterRef = useRef(eventEmitter);
-  const [score, setScore ] = useState<number>(0);
+  const calledOnce = useRef(false);
 
   eventEmitterRef.current.on('changeScore', (newScore: number) => {
     setScore(newScore)
   })
+  const [score, setScore ] = useState<number>(0);
+  const [semaphore, setSemaphore] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!started) {
+    if (!semaphore && !calledOnce.current) {
       main(eventEmitter)
         .then(() => console.log('started game ...'))
         .catch((err) => console.error(err));
-      
-      started = true;
+
+      calledOnce.current = true;
+      setSemaphore(true);
     }
-  }, [started]);
+  }, [semaphore]);
 
   return (
     <main>
