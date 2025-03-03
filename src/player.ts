@@ -53,15 +53,6 @@ export class Player {
 
   public update() {
     if (this.gameState.isPlayerMoving) {
-      if (this.animSpeed !== this.gameState.gameSpeed * 0.0275) {
-        this.animSpeed = this.gameState.gameSpeed * 0.0275;
-
-        this.runningAnim!.animationSpeed = this.animSpeed;
-        this.jumpingAnim!.animationSpeed = this.animSpeed;
-        this.duckingAnim!.animationSpeed = this.animSpeed;
-        this.endingAnim!.animationSpeed = this.animSpeed;
-      }
-
       if (this.gameState.gameEnded) {
         this.runningAnim!.visible = false;
         this.duckingAnim!.visible = false;
@@ -70,6 +61,15 @@ export class Player {
         this.endingAnim!.position.y = this.gameState.playerPositionY;
         this.endingAnim!.visible = true;
         return;
+      }
+
+      if (this.animSpeed !== this.gameState.gameSpeed * 0.0275) {
+        this.animSpeed = this.gameState.gameSpeed * 0.0275;
+
+        this.runningAnim!.animationSpeed = this.animSpeed;
+        this.jumpingAnim!.animationSpeed = this.animSpeed;
+        this.duckingAnim!.animationSpeed = this.animSpeed;
+        this.endingAnim!.animationSpeed = this.animSpeed;
       }
 
       if (this.gameState.isPlayerJumping) {

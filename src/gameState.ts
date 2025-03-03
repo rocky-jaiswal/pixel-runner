@@ -38,10 +38,11 @@ export class GameState {
   public readonly numberOfGroundElements = 1;
   public readonly playerGround;
 
-  private readonly brightnessLevels = [0, -0.3, -0.6];
+  private readonly brightnessLevels = [0, -0.3, -0.7];
   private readonly timeChange = 10000;
 
   private _brightnessIndex = 0;
+  private _gameSpeedStep = 4;
 
   private _playerPositionX = 150;
   private _playerPositionY: number;
@@ -50,10 +51,13 @@ export class GameState {
   private _jumpUp = true;
   private _jumpHeight = 115;
   private _jumpStep = 7.5;
+  private _duckDepth = 4;
+  private _wasJustDucking: boolean = false;
 
   private _gameTimer: NodeJS.Timeout | null = null;
   private _jumpTimer: NodeJS.Timeout | null = null;
   private _duckTimer: NodeJS.Timeout | null = null;
+  private _duckingControlTimer: NodeJS.Timeout | null = null;
   private _enemyReleaseTimer: NodeJS.Timeout | null = null;
 
   public playerSpriteSheet: Spritesheet | null = null;
@@ -119,9 +123,14 @@ export class GameState {
     }
 
     if (ev.key === 'ArrowDown') {
-      if (!this.isPlayerJumping && !this.isPlayerDucking) {
+      if (!this.isPlayerJumping && !this.isPlayerDucking && !this._wasJustDucking) {
+        if (this._duckingControlTimer) {
+          clearTimeout(this._duckingControlTimer);
+        }
+
         this.isPlayerDucking = true;
-        this._playerPositionY += 4;
+        this._playerPositionY += this._duckDepth;
+
         this._duckTimer = setInterval(() => {
           this.handleDuck();
         }, 500);
@@ -148,7 +157,7 @@ export class GameState {
 
   private changeGameSpeed() {
     if (this.gameSpeed < 16) {
-      this.gameSpeed += 4;
+      this.gameSpeed += this._gameSpeedStep;
     }
   }
 
@@ -175,9 +184,14 @@ export class GameState {
   }
 
   private handleDuck() {
-    this._playerPositionY -= 4;
+    this._playerPositionY -= this._duckDepth;
     clearInterval(this._duckTimer!); // clear timer
     this.isPlayerDucking = false;
+
+    this._wasJustDucking = true;
+    this._duckingControlTimer = setInterval(() => {
+      this._wasJustDucking = false;
+    }, 800);
   }
 
   private releaseEnemy() {
@@ -218,6 +232,9 @@ export class GameState {
     }
     if (this._gameTimer) {
       clearInterval(this._gameTimer);
+    }
+    if (this._duckingControlTimer) {
+      clearTimeout(this._duckingControlTimer);
     }
 
     const highScore = localStorage.getItem('_pixel_runner_high_score') ?? '0';
