@@ -1,5 +1,4 @@
 # Pixel Runner
 
-## About
-
-- Based on Pixi.js
+- Pixi.js + React web game
+- `npm run dev` to run game locally
