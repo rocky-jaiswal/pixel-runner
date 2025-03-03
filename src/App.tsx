@@ -36,10 +36,10 @@ function App() {
       <div id="app"></div>
       <div id="scorecard">
         <div className="scores">
-          <p className="score score-head-2">High Score: {highScore}</p>
+          <p className="score score-head-1">Score: {score}</p>
         </div>
         <div className="scores">
-          <p className="score score-head-1">Score: {score}</p>
+          <p className="score score-head-2">High Score: {highScore}</p>
         </div>
         <div className="actions-game">
           <button id="reset-game-btn" onClick={() => document.location.reload()}>
