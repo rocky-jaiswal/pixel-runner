@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Tooltip } from 'react-tooltip';
 import { EventEmitter } from 'pixi.js';
 
 import { main } from './main';
@@ -42,11 +43,14 @@ function App() {
           <p className="score score-head-2">High Score: {highScore}</p>
         </div>
         <div className="actions-game">
+          <button className="help-button" id="help-button">
+            <span>Help 🤔</span>
+          </button>
+          <Tooltip anchorSelect="#help-button" place="top">
+            Use up / down arrow keys to jump / duck
+          </Tooltip>
           <button id="reset-game-btn" onClick={() => document.location.reload()}>
             <span>Restart 🔁</span>
-          </button>
-          <button className="help-button">
-            <span>Help 🤔</span>
           </button>
         </div>
       </div>
