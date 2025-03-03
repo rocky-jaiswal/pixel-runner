@@ -36,7 +36,7 @@ export class GameState {
   public readonly numberOfHills = 12;
   public readonly numberOfTrees = 6;
   public readonly numberOfGroundElements = 1;
-  public readonly playerGround;
+  public readonly playerGroundPosition: number;
 
   private readonly brightnessLevels = [0, -0.3, -0.7];
   private readonly timeChange = 10000;
@@ -46,7 +46,6 @@ export class GameState {
 
   private _playerPositionX = 150;
   private _playerPositionY: number;
-  private _playerGroundPosition: number;
 
   private _jumpUp = true;
   private _jumpHeight = 115;
@@ -82,11 +81,10 @@ export class GameState {
     this.height = props.height;
     console.log({ w: this.width, h: this.height });
 
-    this._playerGroundPosition = this.height * this.groundHeight - 92;
-    this.playerGround = this._playerGroundPosition;
+    this.playerGroundPosition = this.height * this.groundHeight - 92;
 
     // when not jumping
-    this._playerPositionY = this.playerGround;
+    this._playerPositionY = this.playerGroundPosition;
 
     // Add event handlers
     this.eventEmitter.addListener('keydown', (ev) => this.handleKeyDown(ev));
@@ -133,7 +131,7 @@ export class GameState {
 
         this._duckTimer = setInterval(() => {
           this.handleDuck();
-        }, 500);
+        }, 700);
       }
     }
 
@@ -162,13 +160,13 @@ export class GameState {
   }
 
   private handleJump() {
-    if (!this._jumpUp && this._playerPositionY === this.playerGround) {
+    if (!this._jumpUp && this._playerPositionY === this.playerGroundPosition) {
       this.isPlayerJumping = false; // jump is complete
       this._jumpUp = true; // set back jump direction
       clearInterval(this._jumpTimer!); // clear timer
     }
 
-    if (this._jumpUp && this._playerPositionY - this.playerGround >= -this._jumpHeight) {
+    if (this._jumpUp && this._playerPositionY - this.playerGroundPosition >= -this._jumpHeight) {
       this._jumpUp = true;
     } else {
       this._jumpUp = false;
@@ -191,7 +189,7 @@ export class GameState {
     this._wasJustDucking = true;
     this._duckingControlTimer = setInterval(() => {
       this._wasJustDucking = false;
-    }, 800);
+    }, 550);
   }
 
   private releaseEnemy() {
@@ -210,7 +208,7 @@ export class GameState {
         () => {
           this.eventEmitter.emit('releaseEnemy');
         },
-        getRandomIntBetween(1225, 1550),
+        getRandomIntBetween(1225, 1600),
       );
     }
   }
@@ -243,7 +241,7 @@ export class GameState {
       localStorage.setItem('_pixel_runner_high_score', Math.ceil(this.score).toString());
     }
 
-    this._playerPositionY = this._playerGroundPosition + 5;
+    this._playerPositionY = this.playerGroundPosition + 5;
     this.gameEnded = true;
   }
 

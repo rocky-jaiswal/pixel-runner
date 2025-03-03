@@ -28,7 +28,7 @@ export class FlyingEnemy {
     const flyingAnimatedSprite = new AnimatedSprite(this.gameState.flyingEnemySpriteSheet!.animations.flying);
 
     flyingAnimatedSprite.position.x = enemy.position;
-    flyingAnimatedSprite.position.y = this.gameState.playerGround - 90;
+    flyingAnimatedSprite.position.y = this.gameState.playerGroundPosition - 90;
 
     flyingAnimatedSprite.anchor.set(0.5);
     flyingAnimatedSprite.visible = true;

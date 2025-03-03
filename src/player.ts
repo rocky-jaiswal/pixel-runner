@@ -1,9 +1,10 @@
-import { AnimatedSprite } from 'pixi.js';
+import { AnimatedSprite, Container } from 'pixi.js';
 
 import { GameState } from './gameState';
 
 export class Player {
   private readonly gameState: GameState;
+  private container = new Container();
 
   private runningAnim: AnimatedSprite | null = null;
   private jumpingAnim: AnimatedSprite | null = null;
@@ -45,10 +46,12 @@ export class Player {
     this.endingAnim.visible = false;
 
     // add it to the stage to render
-    this.gameState.application.stage.addChild(this.runningAnim);
-    this.gameState.application.stage.addChild(this.jumpingAnim);
-    this.gameState.application.stage.addChild(this.duckingAnim);
-    this.gameState.application.stage.addChild(this.endingAnim);
+    this.container.addChild(this.runningAnim);
+    this.container.addChild(this.jumpingAnim);
+    this.container.addChild(this.duckingAnim);
+    this.container.addChild(this.endingAnim);
+
+    this.gameState.application.stage.addChild(this.container);
   }
 
   public update() {

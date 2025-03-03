@@ -61,6 +61,26 @@ export class MainGameScene extends Container implements GameScene {
     this.player.init();
   }
 
+  private hasCollisionOccured() {
+    // console.log(JSON.stringify(this.gameState.enemies));
+    const activeEnemies = this.gameState.enemies.filter((e) => e.rendered && !e.isPast);
+
+    const groundColl = activeEnemies.some((e) => {
+      return (
+        e.type === 'g' &&
+        e.position >= 92 &&
+        e.position <= 192 &&
+        this.gameState.playerPositionY >= this.gameState.playerGroundPosition - 42
+      );
+    });
+
+    const airColl = activeEnemies.some((e) => {
+      return e.type === 'a' && e.position >= 92 && e.position <= 192 && !this.gameState.isPlayerDucking;
+    });
+
+    return groundColl || airColl;
+  }
+
   public update(_delta: Ticker) {
     if (!this.gameState.gameEnded) {
       this.gameBackgroundSky?.update();
@@ -81,7 +101,12 @@ export class MainGameScene extends Container implements GameScene {
     }
 
     if (this.gameState.isPlayerMoving && !this.gameState.gameEnded) {
-      this.gameState.eventEmitter.emit('updateScore');
+      // check collision and end game on collision
+      if (this.hasCollisionOccured()) {
+        this.gameState.eventEmitter.emit('gameEnded');
+      } else {
+        this.gameState.eventEmitter.emit('updateScore');
+      }
     }
   }
 

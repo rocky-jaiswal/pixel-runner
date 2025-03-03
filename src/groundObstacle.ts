@@ -20,8 +20,8 @@ export class GroundObstacle {
 
   private allElements = {
     bush: 65,
-    stone: 54,
-    mushroom: 70,
+    stone: 60,
+    mushroom: 65,
   };
 
   constructor(gameState: GameState) {
