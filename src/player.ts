@@ -45,16 +45,17 @@ export class Player {
     this.endingAnim.anchor.set(0.5);
     this.endingAnim.visible = false;
 
+    // debug helper
+    // const mark = new Graphics();
+    // mark.circle(155, this.gameState.playerGroundPosition, 90);
+    // mark.fill('#ff0000');
+    // this.container.addChild(mark);
+
     // add it to the stage to render
     this.container.addChild(this.runningAnim);
     this.container.addChild(this.jumpingAnim);
     this.container.addChild(this.duckingAnim);
     this.container.addChild(this.endingAnim);
-
-    // const mark = new Graphics();
-    // mark.circle(85, this.gameState.playerGroundPosition - 42, 2);
-    // mark.fill('#ff0000');
-    // this.container.addChild(mark);
 
     this.gameState.application.stage.addChild(this.container);
   }
