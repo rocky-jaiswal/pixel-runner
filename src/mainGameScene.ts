@@ -68,14 +68,14 @@ export class MainGameScene extends Container implements GameScene {
     const groundColl = activeEnemies.some((e) => {
       return (
         e.type === 'g' &&
-        e.position >= 95 &&
+        e.position >= 80 &&
         e.position <= 193 &&
         this.gameState.playerPositionY >= this.gameState.playerGroundPosition - 42
       );
     });
 
     const airColl = activeEnemies.some((e) => {
-      return e.type === 'a' && e.position >= 95 && e.position <= 193 && !this.gameState.isPlayerDucking;
+      return e.type === 'a' && e.position >= 80 && e.position <= 193 && !this.gameState.isPlayerDucking;
     });
 
     return groundColl || airColl;

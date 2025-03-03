@@ -122,16 +122,16 @@ export class GameState {
 
     if (ev.key === 'ArrowDown') {
       if (!this.isPlayerJumping && !this.isPlayerDucking && !this._wasJustDucking) {
+        this.isPlayerDucking = true;
+        this._playerPositionY += this._duckDepth;
+
         if (this._duckingControlTimer) {
           clearTimeout(this._duckingControlTimer);
         }
 
-        this.isPlayerDucking = true;
-        this._playerPositionY += this._duckDepth;
-
         this._duckTimer = setInterval(() => {
           this.handleDuck();
-        }, 700);
+        }, 750);
       }
     }
 
@@ -191,7 +191,7 @@ export class GameState {
     this._wasJustDucking = true;
     this._duckingControlTimer = setInterval(() => {
       this._wasJustDucking = false;
-    }, 550);
+    }, 450);
   }
 
   private releaseEnemy() {
