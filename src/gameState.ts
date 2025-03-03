@@ -156,6 +156,8 @@ export class GameState {
   private changeGameSpeed() {
     if (this.gameSpeed < 16) {
       this.gameSpeed += this._gameSpeedStep;
+    } else {
+      this.gameSpeed += this._gameSpeedStep / 2;
     }
   }
 

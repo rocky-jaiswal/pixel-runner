@@ -14,7 +14,7 @@ import tree2PNG from './assets/images/tree2.png';
 import tree3PNG from './assets/images/tree3.png';
 import tree4PNG from './assets/images/tree4.png';
 
-import bushPNG from './assets/images/bushO.png';
+import bushPNG from './assets/images/bush.png';
 import mushroomPNG from './assets/images/mushroom.png';
 import stonePNG from './assets/images/stone.png';
 

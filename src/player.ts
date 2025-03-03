@@ -51,6 +51,11 @@ export class Player {
     this.container.addChild(this.duckingAnim);
     this.container.addChild(this.endingAnim);
 
+    // const mark = new Graphics();
+    // mark.circle(85, this.gameState.playerGroundPosition - 42, 2);
+    // mark.fill('#ff0000');
+    // this.container.addChild(mark);
+
     this.gameState.application.stage.addChild(this.container);
   }
 
