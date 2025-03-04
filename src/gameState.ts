@@ -96,7 +96,7 @@ export class GameState {
   }
 
   private handleKeyDown(ev: KeyboardEvent) {
-    if (ev.key === ' ' || ev.key === 'ArrowUp') {
+    if (ev.key === ' ' || ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
       if (!this.isPlayerMoving) {
         this.isPlayerMoving = true;
 
@@ -186,12 +186,13 @@ export class GameState {
   private handleDuck() {
     this._playerPositionY -= this._duckDepth;
     clearInterval(this._duckTimer!); // clear timer
-    this.isPlayerDucking = false;
 
+    this.isPlayerDucking = false;
     this._wasJustDucking = true;
+
     this._duckingControlTimer = setInterval(() => {
       this._wasJustDucking = false;
-    }, 450);
+    }, 350);
   }
 
   private releaseEnemy() {

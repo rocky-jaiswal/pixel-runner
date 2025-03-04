@@ -38,7 +38,7 @@ main {
   display: flex;
   flex-direction: row;
   height: 50px;
-  width: 85vw;
+  width: 80vw;
   background-color: #005494;
   margin-bottom: 10px;
   justify-content: center;
@@ -53,8 +53,8 @@ main {
 }
 
 #app {
-  width: 85vw;
-  height: 85vh;
+  width: 80vw;
+  height: 80vh;
 }
 
 #scorecard {
@@ -63,7 +63,7 @@ main {
   justify-content: space-between;
   align-items: center;
   height: 50px;
-  width: 85vw;
+  width: 80vw;
   background-color: #515151;
   color: #fff;
   margin-top: 10px;
